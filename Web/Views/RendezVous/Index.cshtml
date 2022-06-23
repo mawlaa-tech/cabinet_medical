@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Microservice.Models.RendezVous>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Rendez-vous</h1>
+
+<form asp-action="Search" method="get">
+    <div class="row g-md-3">
+        <div class="col-md-5">
+            <input class="form-control" id="spe" type="text" name="spe" placeholder="Specialite">
+        </div>
+        <div class="col-md-5">
+            <input class="form-control" id="acte" type="text" name="acte" placeholder="Acte medical">
+        </div>
+        <div class="col-md-2">
+            <button class="col-md-auto btn btn-primary btn-sm" type="submit">Rechercher</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlageHoraire.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlageHoraire.HeureDebut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlageHoraire.HeureTer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlageHoraire.ActeMedical)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlageHoraire.Specialite)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraire.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraire.HeureDebut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraire.HeureTer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraire.ActeMedical.Libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraire.Specialite.Nom)
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Annuler</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

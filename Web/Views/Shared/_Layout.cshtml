@@ -1,0 +1,115 @@
+﻿@using System.Diagnostics;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/vendor/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="~/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <link href="~/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+        <div class="container d-flex justify-content-between">
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-envelope"></i> <a href="mailto:contact@laPaiz.com">contact@laPaix.com</a>
+                <i class="bi bi-phone"></i> +1 438 554 5555
+            </div>
+            <div class="d-none d-lg-flex social-links align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </div>
+    <header id="header" class="fixed-top justify-content-center">
+        <div class="container d-flex align-items-center">
+
+            <h1 class="logo me-auto"><a asp-area="" asp-controller="Home" asp-action="Index">La Paix</a></h1>
+
+            @if (Context.Session == null || Context.Session.GetString("_Id") == null || Context.Session.GetString("_Role") == null)
+            {
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="Patients" asp-action="SignIn">Espace Patient</a>
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="Medecins" asp-action="SignIn">Espace Medecin</a>
+            }
+            else if (Context.Session.GetString("_Role") == "ROLE_ADMIN")
+            {
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="Medecins" asp-action="Index">Medecin</a>
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="Home" asp-action="Logout">Deconnexion</a>
+            }
+            else if (Context.Session.GetString("_Role") == "ROLE_MEDECIN")
+            {
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="PlageHoraires" asp-action="Index">Plages horaire</a>
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="Patients" asp-action="Index">Patients</a>
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="Home" asp-action="Logout">Deconnexion</a>
+            }
+            else if (Context.Session.GetString("_Role") == "ROLE_PATIENT")
+            {
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="RendezVous" asp-action="Index">Rendez-vous</a>
+                <a class="appointment-btn scrollto" asp-area="" asp-controller="Home" asp-action="Logout">Deconnexion</a>
+            }
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3" style="padding:110px 0px">
+            <partial name="_Notification">
+
+
+                @RenderBody()
+
+        </main>
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" th:fragment="footer">
+
+        <div class="footer-top">
+            <div class="container ms-auto me-auto">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact align-items-center">
+                        <h3>La Paix</h3>
+                        <p>
+                            555 Boulevard de l'Universite' <br>
+                            Chicoutimi, G7H 4X8<br>
+                            QC, Canada <br><br>
+                            <strong>Telephone:</strong> +1 581 447 3011<br>
+                            <strong>Email:</strong> contact@laPaix.com<br>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/vendor/purecounter/purecounter.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

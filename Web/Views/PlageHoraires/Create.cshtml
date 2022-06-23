@@ -1,0 +1,99 @@
+﻿@model Microservice.Models.PlageHoraire
+
+@{
+    ViewData["Title"] = "Creer";
+}
+
+<h1>Creer</h1>
+
+<h4>PlageHoraire</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeureDebut" class="control-label"></label>
+                <input asp-for="HeureDebut" class="form-control" />
+                <span asp-validation-for="HeureDebut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeureTer" class="control-label"></label>
+                <input asp-for="HeureTer" class="form-control" />
+                <span asp-validation-for="HeureTer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duree" class="control-label"></label>
+                <input asp-for="Duree" class="form-control" />
+                <span asp-validation-for="Duree" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DebutPause" class="control-label"></label>
+                <input asp-for="DebutPause" class="form-control" />
+                <span asp-validation-for="DebutPause" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FinPause" class="control-label"></label>
+                <input asp-for="FinPause" class="form-control" />
+                <span asp-validation-for="FinPause" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecialiteId" class="control-label"></label>
+                <select asp-for="SpecialiteId" class="form-control" asp-items="ViewBag.Specialites" onchange="getActeMedicaux()">
+                    <option>Selectionner une specialite</option>
+                </select>
+                <span asp-validation-for="SpecialiteId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActeMedicalId" class="control-label"></label>
+                <select asp-for="ActeMedicalId" class="form-control" asp-items="ViewBag.ActeMedicaux">
+                    <option value="">Selectionner un acte medical</option>
+                </select>
+                <span asp-validation-for="ActeMedicalId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Creer" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retour a la Liste</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script>
+    function getActeMedicaux() {
+        let option;
+        var selectSpecialite = document.getElementById("SpecialiteId");
+        var selectActeMedical = document.getElementById("ActeMedicalId");
+        var value = selectSpecialite.value;
+        $.ajax({
+            type: "GET",
+            url:"GetActeMedicaux",
+            data:{specialiteId: value},
+            dataType: "json",
+            success: function (data) {
+                $(selectActeMedical).find('option').not(':first').remove();
+                $.each(data,function(i, obj)
+                {
+                    option = document.createElement("option");
+                    option.text = obj.libelle;
+                    option.value = obj.id;
+                    selectActeMedical.appendChild(option);
+                });
+            }
+        });
+    }
+</script>
+
+}

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Microservice.Models.Medecin>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="container">
+    <!----  <partial name="_Notification">-->
+    <div class="row p-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Liste Medecins
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+
+            <a asp-controller="Medecins" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>  Creer Medecin
+            </a>
+        </div>
+        <form asp-controller="Medecins" asp-action="Index" method="get">
+            <p>
+                Recherche: <input type="text" name="searchString" />
+                <input type="submit" value="Filter" />
+            </p>
+        </form>
+
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomMedecin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrenomMedecin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Specialites)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>
+                        @Html.DisplayFor(modelItem => item.NomMedecin)
+                            </td>
+
+                            <td>
+                        @Html.DisplayFor(modelItem => item.PrenomMedecin)
+                            </td>
+                            <td>
+                        @if (item.Specialites != null)
+                        {
+                            for (int i = 0; i < item.Specialites.Count; i++)
+                            {
+                                if (i == item.Specialites.Count - 1)
+                                {
+                                    Write(item.Specialites[i].Nom);
+                                }
+                                else
+                                {
+                                    Write(item.Specialites[i].Nom + ", ");
+                                }
+                            }
+                        }
+                            </td>
+                            <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-controller="Medecins" asp-action="Edit" asp-route-id="@item.Id"
+                           class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Modifier</a>
+                                    <a asp-controller="Medecins" asp-action="Details" asp-route-id="@item.Id"
+                           class="btn btn-info mx-2"> <i class="bi bi-info-square-fill"></i> Details</a>
+                                    <a asp-controller="Medecins" asp-action="Delete" asp-route-id="@item.Id"
+                           class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Supprimer</a>
+                                </div>
+                            </td>
+                        </tr>
+            }
+        </tbody>
+    </table>
+</div>

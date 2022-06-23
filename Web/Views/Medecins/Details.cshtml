@@ -1,0 +1,50 @@
+﻿@model Microservice.Models.Medecin
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Medecin</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NomMedecin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NomMedecin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrenomMedecin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrenomMedecin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+    </dl>
+</div>
+<br />
+<div class="w-75 btn-group" role="group">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Modifier</a>
+    <a asp-action="Index" class="btn btn-danger mx-2"><i class="bi bi-skip-backward-fill"> Retour a la liste</i> </a>
+
+</div>

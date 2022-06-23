@@ -1,0 +1,52 @@
+﻿@model Microservice.Models.Medecin
+
+@{
+    ViewData["Title"] = "Creation - Medecin";
+}
+
+<h1>Creer</h1>
+
+<h4>Medecin</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomMedecin" class="control-label"></label>
+                <input asp-for="NomMedecin" class="form-control" />
+                <span asp-validation-for="NomMedecin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrenomMedecin" class="control-label"></label>
+                <input asp-for="PrenomMedecin" class="form-control" />
+                <span asp-validation-for="PrenomMedecin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecialitesId" class="control-label"></label>
+                <select asp-for="SpecialitesId" class="form-control" asp-items="ViewBag.Specialites"></select>
+                <span asp-validation-for="SpecialitesId" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="w-75 btn-group" role="group">
+                <input type="submit" value="Creer" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger mx-2"><i class="bi bi-skip-backward-fill"> Retour</i> </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+</div>
+

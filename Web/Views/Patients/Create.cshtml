@@ -1,0 +1,67 @@
+﻿@model Microservice.Models.Patient
+
+@{
+    ViewData["Title"] = "Creer - Patient";
+}
+
+<h1>Creer</h1>
+
+<h4>Patient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomPat" class="control-label"></label>
+                <input asp-for="NomPat" class="form-control" autocomplete="off" />
+                <span asp-validation-for="NomPat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrenPat" class="control-label"></label>
+                <input asp-for="PrenPat" class="form-control" autocomplete="off" />
+                <span asp-validation-for="PrenPat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatNaisPat" class="control-label"></label>
+                <input asp-for="DatNaisPat" class="form-control" autocomplete="off" />
+                <span asp-validation-for="DatNaisPat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SexPat" class="control-label"></label>
+                <select asp-for="SexPat" class="form-control" asp-items="ViewBag.Sexes">
+                    <option value="">Selectionner un sexe</option>
+                </select>
+                <span asp-validation-for="SexPat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhonePat" class="control-label"></label>
+                <input asp-for="PhonePat" class="form-control" autocomplete="off" />
+                <span asp-validation-for="PhonePat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Creer" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-success" asp-action="Index">Retour a la Liste</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

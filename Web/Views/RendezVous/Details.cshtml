@@ -1,0 +1,53 @@
+﻿@model Microservice.Models.RendezVous
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Rendez-vous</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlageHoraire.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlageHoraire.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlageHoraire.HeureDebut)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlageHoraire.HeureDebut)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlageHoraire.HeureTer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlageHoraire.HeureTer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlageHoraire.Medecin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlageHoraire.Medecin.NomComplet)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlageHoraire.ActeMedical)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlageHoraire.ActeMedical.Libelle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlageHoraire.Specialite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlageHoraire.Specialite.Nom)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success" asp-action="Index">Retour a la liste</a>
+</div>

@@ -1,0 +1,108 @@
+﻿@using Microservice.Models
+@using System.Diagnostics
+@model PaginatedList<PlageHoraire>
+
+@{
+    ViewData["Title"] = "Resultats";
+}
+
+<h1>Plages horaires</h1>
+
+<form asp-action="Search" method="get">
+    <div class="row g-md-3">
+        <div class="col-md-5">
+            <input class="form-control" id="spe" type="text" name="spe" placeholder="Specialite" asp-route-currentSpe="@(ViewBag.currentSpe)" asp-route-currentActe="@(ViewBag.currentActe)">
+        </div>
+        <div class="col-md-5">
+            <input class="form-control" id="acte" type="text" name="acte" placeholder="Acte medical" asp-route-currentSpe="@(ViewBag.currentSpe)" asp-route-currentActe="@(ViewBag.currentActe)">
+        </div>
+        <div class="col-md-2">
+            <button class="col-md-auto btn btn-primary btn-sm" type="submit">Rechercher</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>
+                @Html.DisplayName("Heure de debut")
+            </th>
+            <th>
+                @Html.DisplayName("Heure de fin")
+            </th>
+            <th>
+                @Html.DisplayName("Acte medical")
+            </th>
+            <th>
+                @Html.DisplayName("Specialite")
+            </th>
+            <th>Resérvé?</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeureDebut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeureTer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActeMedical.Libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specialite.Nom)
+                </td>
+                <td>
+                    @if (item.RendezVous != null)
+                    {
+                        Write("Oui");
+                    }
+                    else
+                    {
+                        Write("Non");
+                    }
+                </td>
+                <td>
+                    @if (item.RendezVous == null)
+                    {
+                        <a class="btn btn-success" asp-action="Create" asp-route-id="@item.Id">Prendre rendez-vous</a>
+                    }
+                    else
+                    {
+                        Write("Déjà réservé");
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Search"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentSpe="@(ViewBag.currentSpe)"
+   asp-route-currentActe="@(ViewBag.currentActe)"
+   class="btn btn-primary @prevDisabled">
+    Precedent
+</a>
+<a asp-action="Search"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentSpe="@(ViewBag.currentSpe)"
+   asp-route-currentActe="@(ViewBag.currentActe)"
+   class="btn btn-primary @nextDisabled">
+    Suivant
+</a>
